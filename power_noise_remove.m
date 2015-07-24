@@ -133,17 +133,21 @@ if ~isempty(noise_decomp)
     c=(sum(abs(real_morlet_wavelet))).^2;
     %a=((2.^(3/4)));
     ac_noise=(1./c).*(rms(amplitude_correction)./rms(scalogram)).*(ac_noise);   %Starting point...
-    amps=0.01:0.001:3;
     
-    least_sq=zeros(length(amps),length(ac_noise));
-    cost=zeros(1,length(amps));
-    for r = 1:length(amps)
-        least_sq(r,:) = amps(r).*ac_noise;
-        cost(1,r)=sum((least_sq(r,:)-Data).^2);
-    end
+	%amps=0.01:0.001:3;
     
-    [~,indices]=min(cost);
-    factor=amps(1,indices);
+    %least_sq=zeros(length(amps),length(ac_noise));
+    %cost=zeros(1,length(amps));
+    %for r = 1:length(amps)
+    %    least_sq(r,:) = amps(r).*ac_noise;
+    %    cost(1,r)=sum((least_sq(r,:)-Data).^2);
+    %end
+    
+    %[~,indices]=min(cost);
+    %factor=amps(1,indices);
+	
+	%Alternatively, after solving the equation
+	factor=sum(ac_noise.*Data)/sum(ac_noise.^2);
     
     ac_noise=factor.*ac_noise;
     

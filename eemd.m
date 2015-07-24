@@ -108,7 +108,7 @@ return; % end eemd
 end
 
 function savedState = set_seed(seedNo)
-defaultStream = RandStream.getGlobalStream;
+defaultStream = RandStream.getGlobalStream; %Samuel erratum
 savedState = defaultStream.State;
 rand('seed',seedNo);
 randn('seed',seedNo);
@@ -116,7 +116,7 @@ randn('seed',seedNo);
 end
 
 function return_seed(savedState)
-RandStream.getGlobalStream.State = savedState;
+RandStream.getGlobalStream.State = savedState;  %Samuel erratum
 end
 
 function [Y, NoiseLevel, NE, numImf, runCEEMD, maxSift, typeSpline,toModifyBC,randType,seedNo, IsInputOkay] = parse_checkProperty(Y, NoiseLevel, NE, numImf, varargin)
